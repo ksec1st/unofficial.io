@@ -487,6 +487,23 @@ transform:translateY(0);
 
 }
 
+.title-logo{
+
+width:500px;
+max-width:90%;
+
+margin-top:20px;
+margin-bottom:10px;
+
+animation:
+fadeUp 1s ease forwards;
+
+animation-delay:2.6s;
+
+opacity:0;
+
+}
+
 /* ==========================
    BUTTON
 ========================== */
