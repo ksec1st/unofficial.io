@@ -240,19 +240,15 @@ position:fixed;
 
 width:100%;
 
-padding:10px 8%;
+padding:12px 8%;
 
 display:flex;
-
 justify-content:space-between;
-
 align-items:center;
 
-background:
-rgba(0,0,0,.6);
+background:rgba(0,0,0,.6);
 
-backdrop-filter:
-blur(10px);
+backdrop-filter:blur(10px);
 
 z-index:1000;
 
