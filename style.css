@@ -238,56 +238,43 @@ header{
 
 position:fixed;
 
-top:0;
-left:0;
-
 width:100%;
 
-padding:8px 5%;
+padding:20px 8%;
 
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
 
-background:rgba(0,0,0,.75);
+background:
+rgba(0,0,0,.6);
 
-backdrop-filter:blur(10px);
+backdrop-filter:
+blur(10px);
 
 z-index:1000;
 
 }
 
+.logo{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+font-weight:700;
+
+font-size:1.2rem;
+
+}
+
 .logo img{
-width:28px;
-}
 
-.logo span{
-font-size:0.9rem;
-}
-
-nav a{
-font-size:0.9rem;
-}
-
-.header-logo{
-
-height:100px;
-width:auto;
-
-transition:.3s;
-
-filter:
-drop-shadow(0 0 8px rgba(46,168,230,.5));
-
-}
-
-.header-logo:hover{
-
-transform:scale(1.05);
-
-filter:
-drop-shadow(0 0 15px #2EA8E6)
-drop-shadow(0 0 30px #2EA8E6);
+width:40px;
 
 }
 
@@ -334,7 +321,10 @@ cursor:pointer;
 height:100vh;
 
 display:flex;
+
 flex-direction:column;
+
+justify-content:center;
 
 align-items:center;
 
@@ -375,11 +365,8 @@ animation-delay:2.8s;
 
 .hero-logo{
 
-display:block;
-
-margin:0 auto;
-
 width:300px;
+
 max-width:70%;
 
 }
@@ -485,23 +472,6 @@ transform:translateY(-20px);
 100%{
 transform:translateY(0);
 }
-
-}
-
-.title-logo{
-
-width:500px;
-max-width:90%;
-
-margin-top:20px;
-margin-bottom:10px;
-
-animation:
-fadeUp 1s ease forwards;
-
-animation-delay:2.6s;
-
-opacity:0;
 
 }
 
@@ -646,111 +616,6 @@ box-shadow:
 }
 
 /* ==========================
-   OPEN CAMPUS
-========================== */
-
-.next-campus{
-
-background:
-linear-gradient(
-135deg,
-rgba(46,168,230,.2),
-rgba(46,168,230,.05)
-);
-
-border:
-1px solid rgba(46,168,230,.4);
-
-padding:40px;
-
-border-radius:20px;
-
-margin-bottom:40px;
-
-text-align:center;
-
-box-shadow:
-0 0 30px rgba(46,168,230,.2);
-
-}
-
-.badge{
-
-display:inline-block;
-
-padding:8px 16px;
-
-border-radius:999px;
-
-background:#2EA8E6;
-
-font-weight:bold;
-
-margin-bottom:15px;
-
-}
-
-.next-campus h3{
-
-font-size:2rem;
-
-margin-bottom:10px;
-
-}
-
-.campus-list{
-
-display:flex;
-
-flex-direction:column;
-
-gap:15px;
-
-}
-
-.campus-card{
-
-display:flex;
-
-align-items:center;
-
-gap:20px;
-
-padding:20px;
-
-background:#111827;
-
-border-radius:15px;
-
-transition:.3s;
-
-}
-
-.campus-card:hover{
-
-transform:
-translateX(8px);
-
-box-shadow:
-0 0 20px rgba(46,168,230,.3);
-
-}
-
-.campus-date{
-
-min-width:80px;
-
-text-align:center;
-
-font-size:1.4rem;
-
-font-weight:bold;
-
-color:#2EA8E6;
-
-}
-
-/* ==========================
    COUNTER
 ========================== */
 
@@ -865,66 +730,6 @@ width:220px;
 
 section{
 padding:80px 7%;
-}
-
-}
-
-/* ==========================
-   Star Animation
-========================== */
-
-.shooting-star{
-
-position:fixed;
-
-width:150px;
-height:2px;
-
-background:
-linear-gradient(
-90deg,
-#ffffff,
-#2EA8E6,
-transparent
-);
-
-transform:rotate(-35deg);
-
-pointer-events:none;
-
-z-index:-2;
-
-animation:
-shoot 2s linear forwards;
-
-}
-
-@keyframes shoot{
-
-0%{
-
-opacity:0;
-
-transform:
-translate(0,0)
-rotate(-35deg);
-
-}
-
-10%{
-
-opacity:1;
-
-}
-
-100%{
-
-opacity:0;
-
-transform:
-translate(-1200px,600px)
-rotate(-35deg);
-
 }
 
 }
