@@ -331,14 +331,12 @@ cursor:pointer;
 
 .hero{
 
-height:70vh;
+height:100vh;
 
 display:flex;
-
 flex-direction:column;
 
 justify-content:center;
-
 align-items:center;
 
 text-align:center;
@@ -378,8 +376,11 @@ animation-delay:2.8s;
 
 .hero-logo{
 
-width:300px;
+display:block;
 
+margin:0 auto;
+
+width:300px;
 max-width:70%;
 
 }
