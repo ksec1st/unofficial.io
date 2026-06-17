@@ -259,6 +259,27 @@ nav.classList.remove("active");
 });
 
 /* ==========================
+   PARALLAX HERO
+========================== */
+
+window.addEventListener("scroll",()=>{
+
+const scrolled =
+window.scrollY;
+
+const heroLogo =
+document.querySelector(".hero-logo");
+
+if(heroLogo){
+
+heroLogo.style.transform =
+`translateY(${scrolled * 0.1}px)`;
+
+}
+
+});
+
+/* ==========================
    OPTIONAL PRELOADER
 ========================== */
 
