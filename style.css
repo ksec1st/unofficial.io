@@ -235,23 +235,19 @@ z-index:-1;
 ========================== */
 
 header{
-
-position:fixed;
-
-width:100%;
-
 padding:12px 8%;
+}
 
-display:flex;
-justify-content:space-between;
-align-items:center;
+.logo img{
+width:32px;
+}
 
-background:rgba(0,0,0,.6);
+.logo{
+font-size:1rem;
+}
 
-backdrop-filter:blur(10px);
-
-z-index:1000;
-
+nav{
+gap:20px;
 }
 
 .logo{
