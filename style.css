@@ -733,3 +733,63 @@ padding:80px 7%;
 }
 
 }
+
+/* ==========================
+   Star Animation
+========================== */
+
+.shooting-star{
+
+position:fixed;
+
+width:150px;
+height:2px;
+
+background:
+linear-gradient(
+90deg,
+#ffffff,
+#2EA8E6,
+transparent
+);
+
+transform:rotate(-35deg);
+
+pointer-events:none;
+
+z-index:-2;
+
+animation:
+shoot 2s linear forwards;
+
+}
+
+@keyframes shoot{
+
+0%{
+
+opacity:0;
+
+transform:
+translate(0,0)
+rotate(-35deg);
+
+}
+
+10%{
+
+opacity:1;
+
+}
+
+100%{
+
+opacity:0;
+
+transform:
+translate(-1200px,600px)
+rotate(-35deg);
+
+}
+
+}
