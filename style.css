@@ -658,6 +658,111 @@ translateY(0);
 }
 
 /* ==========================
+   OPEN CAMPUS
+========================== */
+
+.next-campus{
+
+background:
+linear-gradient(
+135deg,
+rgba(46,168,230,.2),
+rgba(46,168,230,.05)
+);
+
+border:
+1px solid rgba(46,168,230,.4);
+
+padding:40px;
+
+border-radius:20px;
+
+margin-bottom:40px;
+
+text-align:center;
+
+box-shadow:
+0 0 30px rgba(46,168,230,.2);
+
+}
+
+.badge{
+
+display:inline-block;
+
+padding:8px 16px;
+
+border-radius:999px;
+
+background:#2EA8E6;
+
+font-weight:bold;
+
+margin-bottom:15px;
+
+}
+
+.next-campus h3{
+
+font-size:2rem;
+
+margin-bottom:10px;
+
+}
+
+.campus-list{
+
+display:flex;
+
+flex-direction:column;
+
+gap:15px;
+
+}
+
+.campus-card{
+
+display:flex;
+
+align-items:center;
+
+gap:20px;
+
+padding:20px;
+
+background:#111827;
+
+border-radius:15px;
+
+transition:.3s;
+
+}
+
+.campus-card:hover{
+
+transform:
+translateX(8px);
+
+box-shadow:
+0 0 20px rgba(46,168,230,.3);
+
+}
+
+.campus-date{
+
+min-width:80px;
+
+text-align:center;
+
+font-size:1.4rem;
+
+font-weight:bold;
+
+color:#2EA8E6;
+
+}
+
+/* ==========================
    FOOTER
 ========================== */
 
