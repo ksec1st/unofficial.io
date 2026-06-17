@@ -257,6 +257,18 @@ z-index:1000;
 
 }
 
+.logo img{
+width:28px;
+}
+
+.logo span{
+font-size:0.9rem;
+}
+
+nav a{
+font-size:0.9rem;
+}
+
 .header-logo{
 
 height:100px;
