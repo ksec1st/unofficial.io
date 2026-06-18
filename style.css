@@ -841,7 +841,7 @@ color:#2EA8E6;
 
 .campus-btn{
 
-display:flex;
+display:inline-flex;
 
 align-items:center;
 justify-content:center;
