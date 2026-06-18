@@ -841,14 +841,16 @@ color:#2EA8E6;
 
 .campus-btn{
 
-display:inline-flex;
+display:flex;
 
 align-items:center;
 justify-content:center;
 
 gap:10px;
 
-margin-top:25px;
+width:fit-content;
+
+margin:25px auto 0;
 
 padding:18px 35px;
 
