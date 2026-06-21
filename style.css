@@ -988,6 +988,53 @@ rotate(-35deg);
 }
 
 /* ==========================
+   INSTAGRAM
+========================== */
+
+#instagram{
+
+    text-align:center;
+
+}
+
+.insta-text{
+
+    margin-bottom:30px;
+
+    opacity:.8;
+
+    font-size:1.1rem;
+
+}
+
+/* Elfsight本体 */
+
+.elfsight-app-819b31e4-24ea-409b-ba57-4400c24d11ab{
+
+    margin-top:30px;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 0 25px rgba(46,168,230,.2);
+
+}
+
+/* スマホ対応 */
+
+@media(max-width:768px){
+
+    .insta-text{
+
+        font-size:1rem;
+
+    }
+
+}
+
+/* ==========================
    FOOTER
 ========================== */
 
