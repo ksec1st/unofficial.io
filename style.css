@@ -992,7 +992,6 @@ rotate(-35deg);
 ========================== */
 
 #instagram{
-
     text-align:left;
 
 }
@@ -1029,6 +1028,7 @@ rotate(-35deg);
 @media(max-width:768px){
 
     .insta-text{
+        text-align:left;
 
         font-size:1rem;
 
