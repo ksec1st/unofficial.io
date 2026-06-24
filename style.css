@@ -1269,30 +1269,153 @@ margin-bottom:20px;
 
 }
 
-/* ==========================
-   FOOTER
-========================== */
+/*************************
+ FOOTER
+*************************/
 
 footer{
 
-padding:50px;
+    padding:60px 20px;
 
-text-align:center;
+    text-align:center;
 
-background:#0a0f18;
+    background:#0b0f1a;
 
-}
-
-.footer-logo{
-
-font-size:1.5rem;
-
-font-weight:700;
-
-margin-bottom:10px;
+    border-top:
+    1px solid rgba(46,168,230,.2);
 
 }
 
+.footer-message{
+
+    opacity:.7;
+
+    margin-bottom:25px;
+
+}
+
+/*************************
+ SNS
+*************************/
+
+.social-links{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    margin-bottom:30px;
+
+}
+
+.social-links a{
+
+    width:70px;
+    height:70px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:50%;
+
+    background:#111827;
+
+    color:white;
+
+    font-size:2rem;
+
+    text-decoration:none;
+
+    position:relative;
+
+    animation:
+    socialFloat 4s ease-in-out infinite;
+
+    transition:.3s;
+
+}
+
+.social-links a:hover{
+
+    transform:
+    translateY(-10px)
+    scale(1.15);
+
+}
+
+/* X */
+
+.social-links .x:hover{
+
+    box-shadow:
+    0 0 20px #ffffff,
+    0 0 40px #ffffff;
+
+}
+
+/* Instagram */
+
+.social-links .instagram:hover{
+
+    box-shadow:
+    0 0 20px #E1306C,
+    0 0 40px #E1306C;
+
+}
+
+/* YouTube */
+
+.social-links .youtube:hover{
+
+    box-shadow:
+    0 0 20px #ff0000,
+    0 0 40px #ff0000;
+
+}
+
+/*************************
+ FLOAT
+*************************/
+
+@keyframes socialFloat{
+
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-8px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+
+}
+
+.social-links a:nth-child(2){
+
+    animation-delay:.5s;
+
+}
+
+.social-links a:nth-child(3){
+
+    animation-delay:1s;
+
+}
+
+.copyright{
+
+    opacity:.6;
+
+    font-size:.9rem;
+
+}
 /* ==========================
    MOBILE
 ========================== */
@@ -1343,6 +1466,23 @@ width:220px;
 section{
 padding:80px 5%;
 }
+
+@media(max-width:768px){
+
+    .social-links{
+
+        gap:20px;
+
+    }
+
+    .social-links a{
+
+        width:55px;
+        height:55px;
+
+        font-size:1.5rem;
+
+    }
 
 }
 
