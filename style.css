@@ -928,64 +928,112 @@ box-shadow:
 }
 
 /*************************
- OPEN CAMPUS SITE BUTTON
+ OPEN CAMPUS BUTTON 2
 *************************/
 
-.campus-site-btn-wrapper{
+.campus-view-wrapper{
 
     display:flex;
 
     justify-content:center;
 
-    margin-top:30px;
+    margin-top:35px;
 
 }
 
-.campus-site-btn{
+.campus-view-btn{
+
+    position:relative;
 
     display:flex;
 
     align-items:center;
 
-    justify-content:center;
+    gap:15px;
 
-    gap:10px;
+    padding:18px 38px;
 
-    padding:18px 40px;
+    border:2px solid #2EA8E6;
 
     border-radius:999px;
 
-    text-decoration:none;
+    color:#fff;
 
-    color:white;
+    text-decoration:none;
 
     font-weight:700;
 
-    font-size:1.05rem;
+    letter-spacing:1px;
+
+    overflow:hidden;
+
+    transition:.4s;
 
     background:
-    linear-gradient(
-        135deg,
-        #2EA8E6,
-        #4cc9f0
-    );
+    rgba(46,168,230,.08);
+
+    backdrop-filter:blur(10px);
 
     box-shadow:
-        0 0 20px rgba(46,168,230,.3);
+    0 0 20px rgba(46,168,230,.2);
+
+}
+
+.campus-view-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:120%;
+    height:100%;
+
+    background:
+
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.3),
+        transparent
+    );
+
+    transition:.8s;
+
+}
+
+.campus-view-btn:hover::before{
+
+    left:120%;
+
+}
+
+.campus-view-btn:hover{
+
+    transform:
+    translateY(-5px);
+
+    box-shadow:
+    0 0 30px rgba(46,168,230,.5),
+    0 0 60px rgba(46,168,230,.3);
+
+    background:
+    rgba(46,168,230,.15);
+
+}
+
+.campus-view-btn svg{
 
     transition:.3s;
 
 }
 
-.campus-site-btn:hover{
+.campus-view-btn:hover svg{
 
     transform:
-        translateY(-5px)
-        scale(1.03);
-
-    box-shadow:
-        0 0 30px rgba(46,168,230,.5),
-        0 0 60px rgba(46,168,230,.3);
+    translateX(8px);
 
 }
 
