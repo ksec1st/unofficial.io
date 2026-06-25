@@ -928,6 +928,45 @@ box-shadow:
 }
 
 /*************************
+ OPEN CAMPUS Pages Top PNG
+*************************/
+
+.campus-title{
+
+    animation: logoGlow 3s infinite alternate;
+
+}
+
+@keyframes logoGlow{
+
+    from{
+
+        filter:
+        drop-shadow(0 0 10px #2EA8E6);
+
+    }
+
+    to{
+
+        filter:
+        drop-shadow(0 0 20px #2EA8E6)
+        drop-shadow(0 0 40px #2EA8E6);
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .campus-title{
+
+        width:90%;
+
+    }
+
+}
+
+/*************************
  OPEN CAMPUS BUTTON 2
 *************************/
 
