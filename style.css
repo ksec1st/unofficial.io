@@ -933,7 +933,7 @@ box-shadow:
 
 .campus-title{
 
-    width:900px;
+    width:1000px;
 
     max-width:95%;
 
@@ -997,7 +997,7 @@ box-shadow:
 
 }
 
-@media(max-width:768px){
+@media(max-width:790px){
 
     .campus-title{
 
