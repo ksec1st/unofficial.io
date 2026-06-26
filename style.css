@@ -1262,6 +1262,22 @@ rotate(-35deg);
 
 }
 
+@media(max-width:768px){
+
+    .campus-title{
+
+        width:115%;
+
+        max-width:none;
+
+        margin-left:-7.5%;
+
+        margin-top:20px;
+
+    }
+
+}
+
 .campus-hero{
 
 height:60vh;
