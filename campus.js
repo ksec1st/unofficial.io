@@ -2,12 +2,11 @@
    FADE IN
 ========================== */
 
-const observer =
-new IntersectionObserver((entries)=>{
+const observer = new IntersectionObserver((entries) => {
 
-    entries.forEach(entry=>{
+    entries.forEach(entry => {
 
-        if(entry.isIntersecting){
+        if (entry.isIntersecting) {
 
             entry.target.classList.add("show");
 
@@ -15,144 +14,183 @@ new IntersectionObserver((entries)=>{
 
     });
 
-},{
-    threshold:0.15
+}, {
+
+    threshold: 0.15
+
 });
 
-document
-.querySelectorAll(".fade")
-.forEach(el=>observer.observe(el));
+document.querySelectorAll(".fade").forEach(el => observer.observe(el));
 
 /* ==========================
-   SMOOTH SCROLL
+   LOAD OPEN CAMPUS SCHEDULE
 ========================== */
 
-document.querySelectorAll('a[href^="#"]')
-.forEach(anchor=>{
+async function loadSchedule() {
 
-    anchor.addEventListener("click",function(e){
+    try {
 
-        e.preventDefault();
+        const response = await fetch("schedule.json");
 
-        const target =
-        document.querySelector(
-            this.getAttribute("href")
-        );
+        const events = await response.json();
 
-        if(target){
+        const today = new Date();
 
-            target.scrollIntoView({
+        today.setHours(0,0,0,0);
 
-                behavior:"smooth"
+        /* ==========================
+           次回開催
+        ========================== */
+
+        const nextEvent = events.find(event => {
+
+            return new Date(event.date) >= today;
+
+        });
+
+        if(nextEvent){
+
+            const d = new Date(nextEvent.date);
+
+            const options = {
+                month:"long",
+                day:"numeric",
+                weekday:"short"
+            };
+
+            const nextDate =
+                document.getElementById("next-date");
+
+            const nextTitle =
+                document.getElementById("next-title");
+
+            const nextTime =
+                document.getElementById("next-time");
+
+            if(nextDate){
+
+                nextDate.textContent =
+                d.toLocaleDateString("ja-JP",options);
+
+            }
+
+            if(nextTitle){
+
+                nextTitle.textContent =
+                nextEvent.title;
+
+            }
+
+            if(nextTime){
+
+                nextTime.textContent =
+                nextEvent.time;
+
+            }
+
+            /* ==========================
+               あと何日
+            ========================== */
+
+            const diff =
+            Math.ceil(
+
+                (new Date(nextEvent.date)-today)
+
+                /(1000*60*60*24)
+
+            );
+
+            const countdown =
+            document.getElementById("countdown");
+
+            if(countdown){
+
+                countdown.textContent =
+                `開催まで あと ${diff} 日`;
+
+            }
+
+        }
+
+        /* ==========================
+           全日程
+        ========================== */
+
+        const list =
+        document.getElementById("schedule-list");
+
+        if(list){
+
+            list.innerHTML="";
+
+            events.forEach(event=>{
+
+                const eventDate =
+                new Date(event.date);
+
+                const diff =
+                Math.ceil(
+
+                    (eventDate-today)
+
+                    /(1000*60*60*24)
+
+                );
+
+                let statusClass="";
+
+                if(diff<0){
+
+                    statusClass="finished";
+
+                }
+
+                else if(diff<=7){
+
+                    statusClass="coming";
+
+                }
+
+                list.innerHTML += `
+
+                <div class="campus-card ${statusClass}">
+
+                    <span class="campus-date">
+
+                        ${eventDate.getMonth()+1}/${eventDate.getDate()}
+
+                    </span>
+
+                    <div>
+
+                        <strong>
+
+                            ${event.title}
+
+                        </strong>
+
+                        <br>
+
+                        ${event.time}
+
+                    </div>
+
+                </div>
+
+                `;
 
             });
 
         }
 
-    });
-
-});
-
-/* ==========================
-   FAQ OPEN ANIMATION
-========================== */
-
-document
-.querySelectorAll(".faq details")
-.forEach(item=>{
-
-    item.addEventListener("toggle",()=>{
-
-        if(item.open){
-
-            item.style.boxShadow =
-            "0 0 25px rgba(46,168,230,.3)";
-
-        }else{
-
-            item.style.boxShadow =
-            "none";
-
-        }
-
-    });
-
-});
-
-/* ==========================
-   PAGE LOADED
-========================== */
-
-console.log("Open Campus Loaded 🎮");
-
-/* ==========================
-   Date
-========================== */
-
-async function loadSchedule(){
-
-    const response = await fetch("schedule.json");
-
-    const events = await response.json();
-
-    const today = new Date();
-
-    today.setHours(0,0,0,0);
-
-    const next = events.find(event=>{
-
-        return new Date(event.date)>=today;
-
-    });
-
-    if(next){
-
-        const d = new Date(next.date);
-
-        document.getElementById("next-date").textContent =
-            `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
-
-        document.getElementById("next-title").textContent =
-            next.title;
-
-        document.getElementById("next-time").textContent =
-            next.time;
-
     }
 
-    const list =
-    document.getElementById("schedule-list");
+    catch(error){
 
-    list.innerHTML="";
+        console.error(error);
 
-    events.forEach(event=>{
-
-        const d =
-        new Date(event.date);
-
-        list.innerHTML += `
-
-        <div class="campus-card">
-
-            <span class="campus-date">
-
-                ${d.getMonth()+1}/${d.getDate()}
-
-            </span>
-
-            <div>
-
-                <strong>${event.title}</strong><br>
-
-                ${event.time}
-
-            </div>
-
-        </div>
-
-        `;
-
-    });
+    }
 
 }
 
