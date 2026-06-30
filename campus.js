@@ -84,3 +84,76 @@ document
 ========================== */
 
 console.log("Open Campus Loaded 🎮");
+
+/* ==========================
+   Date
+========================== */
+
+async function loadSchedule(){
+
+    const response = await fetch("schedule.json");
+
+    const events = await response.json();
+
+    const today = new Date();
+
+    today.setHours(0,0,0,0);
+
+    const next = events.find(event=>{
+
+        return new Date(event.date)>=today;
+
+    });
+
+    if(next){
+
+        const d = new Date(next.date);
+
+        document.getElementById("next-date").textContent =
+            `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`;
+
+        document.getElementById("next-title").textContent =
+            next.title;
+
+        document.getElementById("next-time").textContent =
+            next.time;
+
+    }
+
+    const list =
+    document.getElementById("schedule-list");
+
+    list.innerHTML="";
+
+    events.forEach(event=>{
+
+        const d =
+        new Date(event.date);
+
+        list.innerHTML += `
+
+        <div class="campus-card">
+
+            <span class="campus-date">
+
+                ${d.getMonth()+1}/${d.getDate()}
+
+            </span>
+
+            <div>
+
+                <strong>${event.title}</strong><br>
+
+                ${event.time}
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+loadSchedule();
