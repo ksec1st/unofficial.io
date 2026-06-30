@@ -149,7 +149,7 @@ async function loadSchedule() {
 
         badge = `
         <span class="status finished-badge">
-            終了しました
+            終了
         </span>`;
 
     }
@@ -160,7 +160,7 @@ async function loadSchedule() {
 
         badge = `
         <span class="status today-badge">
-            本日開催！
+            本日開催
         </span>`;
 
     }
@@ -171,7 +171,7 @@ async function loadSchedule() {
 
         badge = `
         <span class="status accept-badge">
-            受付中
+            準備中
         </span>`;
 
     }
