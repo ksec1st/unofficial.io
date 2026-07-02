@@ -1650,6 +1650,8 @@ footer{
 display:block;
 }
 
+}
+
 nav{
 
 display:none;
@@ -2243,5 +2245,37 @@ padding:18px;
 font-size:1rem;
 
 }
+
+}
+
+/* ==========================
+   Mobile Scroll Fix
+========================== */
+
+html,
+body{
+
+    width:100%;
+    overflow-x:hidden;
+    overflow-y:auto;
+
+    overscroll-behavior-y:auto;
+
+    -webkit-overflow-scrolling:touch;
+
+}
+
+body{
+
+    position:relative;
+
+    min-height:100vh;
+
+}
+
+.hero{
+
+    min-height:100vh;
+    height:auto;
 
 }
