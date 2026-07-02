@@ -140,44 +140,50 @@ async function loadSchedule() {
 
     const weekDay = week[eventDate.getDay()];
 
-    // 今日の日付
+// 開催日
+const eventDate = new Date(event.date);
+eventDate.setHours(0, 0, 0, 0);
+
+// 今日
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
-// 開催日
-const eventDate = new Date(event.date);
-
-// 開催日までの日数
+// 開催までの日数
 const diff = Math.ceil(
     (eventDate - today) / (1000 * 60 * 60 * 24)
 );
 
 let status = "";
 let badgeClass = "";
+let cardClass = "";
 
 // 開催終了
 if (diff < 0) {
 
     status = "終了";
     badgeClass = "finished-badge";
+    cardClass = "finished";
 
-// 本日
+// 本日開催
 } else if (diff === 0) {
 
     status = "本日開催";
     badgeClass = "today-badge";
+    cardClass = "today";
 
-// 1か月前（30日前）以内
+// 開催30日前〜前日
 } else if (diff <= 30) {
 
     status = "受付中";
     badgeClass = "accept-badge";
+    cardClass = "coming";
 
-// 1か月以上前
+// 開催31日前以上
 } else {
 
     status = "準備中";
     badgeClass = "prepare-badge";
+    cardClass = "prepare";
 
 }
 
