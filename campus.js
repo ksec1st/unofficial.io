@@ -2,11 +2,11 @@
    FADE IN
 ========================== */
 
-const observer = new IntersectionObserver((entries)=>{
+const observer = new IntersectionObserver((entries) => {
 
-    entries.forEach(entry=>{
+    entries.forEach(entry => {
 
-        if(entry.isIntersecting){
+        if (entry.isIntersecting) {
 
             entry.target.classList.add("show");
 
@@ -14,24 +14,19 @@ const observer = new IntersectionObserver((entries)=>{
 
     });
 
-},{
-    threshold:0.15
+}, {
+    threshold: 0.15
 });
 
-document.querySelectorAll(".fade").forEach(el=>{
-
-    observer.observe(el);
-
-});
-
+document.querySelectorAll(".fade").forEach(el => observer.observe(el));
 
 /* ==========================
-   OPEN CAMPUS SCHEDULE
+   LOAD OPEN CAMPUS SCHEDULE
 ========================== */
 
-async function loadSchedule(){
+async function loadSchedule() {
 
-    try{
+    try {
 
         const response = await fetch("schedule.json");
         const events = await response.json();
@@ -39,12 +34,11 @@ async function loadSchedule(){
         const today = new Date();
         today.setHours(0,0,0,0);
 
-
         /* ==========================
-           NEXT EVENT
+           次回開催
         ========================== */
 
-        const nextEvent = events.find(event=>{
+        const nextEvent = events.find(event => {
 
             const d = new Date(event.date);
             d.setHours(0,0,0,0);
@@ -57,7 +51,7 @@ async function loadSchedule(){
 
             const d = new Date(nextEvent.date);
 
-            const option={
+            const option = {
 
                 month:"long",
                 day:"numeric",
@@ -65,53 +59,34 @@ async function loadSchedule(){
 
             };
 
-            const nextDate=document.getElementById("next-date");
-            const nextTitle=document.getElementById("next-title");
-            const nextTime=document.getElementById("next-time");
-            const countdown=document.getElementById("countdown");
+            document.getElementById("next-date").textContent =
+            d.toLocaleDateString("ja-JP",option);
 
-            if(nextDate){
+            document.getElementById("next-title").textContent =
+            nextEvent.title;
 
-                nextDate.textContent=
-                d.toLocaleDateString("ja-JP",option);
+            document.getElementById("next-time").textContent =
+            nextEvent.time;
 
-            }
+            const diff = Math.ceil(
 
-            if(nextTitle){
+                (d - today) /
 
-                nextTitle.textContent=
-                nextEvent.title;
-
-            }
-
-            if(nextTime){
-
-                nextTime.textContent=
-                nextEvent.time;
-
-            }
-
-            const diff=Math.ceil(
-
-                (d-today)/(1000*60*60*24)
+                (1000*60*60*24)
 
             );
 
-            if(countdown){
+            document.getElementById("countdown").textContent =
 
-                countdown.textContent=
-                "開催まで あと "+diff+"日";
-
-            }
+            `開催まで あと ${diff} 日`;
 
         }
 
-
         /* ==========================
-           SCHEDULE LIST
+           全日程
         ========================== */
 
-        const list=
+        const list =
         document.getElementById("schedule-list");
 
         if(!list) return;
@@ -120,33 +95,26 @@ async function loadSchedule(){
 
         events.forEach(event=>{
 
-            const eventDate=new Date(event.date);
+            const eventDate = new Date(event.date);
             eventDate.setHours(0,0,0,0);
 
-            const diff=Math.ceil(
+            const diff = Math.ceil(
 
-                (eventDate-today)/(1000*60*60*24)
+                (eventDate - today)
+
+                /(1000*60*60*24)
 
             );
-
-            const week=[
-                "日",
-                "月",
-                "火",
-                "水",
-                "木",
-                "金",
-                "土"
-            ];
-
-            const weekDay=
-            week[eventDate.getDay()];
 
             let status="";
             let badgeClass="";
             let cardClass="";
 
-            if(diff<0){
+            // =====================
+            // ステータス
+            // =====================
+
+            if(diff < 0){
 
                 status="終了";
                 badgeClass="finished-badge";
@@ -178,64 +146,52 @@ async function loadSchedule(){
 
             }
 
-
             if(event.type==="ナイト"){
 
-                cardClass+=" night";
+                cardClass += " night";
 
             }
 
+            const badge =
 
-            let countText="";
+            `<span class="status ${badgeClass}">
+                ${status}
+            </span>`;
 
-            if(diff>0){
+            const week =
 
-                countText=
-                "開催まで あと "+diff+"日";
+            ["日","月","火","水","木","金","土"];
 
-            }
+            list.innerHTML +=
 
-            else if(diff===0){
-
-                countText=
-                "本日開催";
-
-            }
-
-            else{
-
-                countText=
-                "開催終了";
-
-            }
-
-
-            list.innerHTML+=`
-
+            `
             <div class="campus-card ${cardClass}">
 
-                <span class="status ${badgeClass}">
-                    ${status}
+                ${badge}
+
+                <span class="campus-date">
+
+                    ${eventDate.getMonth()+1}月
+                    ${eventDate.getDate()}日
+                    (${week[eventDate.getDay()]})
+
                 </span>
 
-                <div class="campus-date">
-                    ${eventDate.getMonth()+1}/${eventDate.getDate()}（${weekDay}）
-                </div>
-
-                <strong>
-                    ${event.title}
-                </strong>
-
                 <div>
-                    ${event.time}
-                </div>
 
-                <div class="countdown">
-                    ${countText}
+                    <strong>
+
+                        ${event.title}
+
+                    </strong>
+
+                    <br>
+
+                    ${event.time}
+
                 </div>
 
             </div>
-
             `;
 
         });
