@@ -2,11 +2,11 @@
    FADE IN
 ========================== */
 
-const observer = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver((entries)=>{
 
-    entries.forEach(entry => {
+    entries.forEach(entry=>{
 
-        if (entry.isIntersecting) {
+        if(entry.isIntersecting){
 
             entry.target.classList.add("show");
 
@@ -14,37 +14,42 @@ const observer = new IntersectionObserver((entries) => {
 
     });
 
-}, {
+},{
+    threshold:0.15
+});
 
-    threshold: 0.15
+document.querySelectorAll(".fade").forEach(el=>{
+
+    observer.observe(el);
 
 });
 
-document.querySelectorAll(".fade").forEach(el => observer.observe(el));
 
 /* ==========================
-   LOAD OPEN CAMPUS SCHEDULE
+   OPEN CAMPUS SCHEDULE
 ========================== */
 
-async function loadSchedule() {
+async function loadSchedule(){
 
-    try {
+    try{
 
         const response = await fetch("schedule.json");
-
         const events = await response.json();
 
         const today = new Date();
-
         today.setHours(0,0,0,0);
 
+
         /* ==========================
-           次回開催
+           NEXT EVENT
         ========================== */
 
-        const nextEvent = events.find(event => {
+        const nextEvent = events.find(event=>{
 
-            return new Date(event.date) >= today;
+            const d = new Date(event.date);
+            d.setHours(0,0,0,0);
+
+            return d >= today;
 
         });
 
@@ -52,181 +57,188 @@ async function loadSchedule() {
 
             const d = new Date(nextEvent.date);
 
-            const options = {
+            const option={
+
                 month:"long",
                 day:"numeric",
                 weekday:"short"
+
             };
 
-            const nextDate =
-                document.getElementById("next-date");
-
-            const nextTitle =
-                document.getElementById("next-title");
-
-            const nextTime =
-                document.getElementById("next-time");
+            const nextDate=document.getElementById("next-date");
+            const nextTitle=document.getElementById("next-title");
+            const nextTime=document.getElementById("next-time");
+            const countdown=document.getElementById("countdown");
 
             if(nextDate){
 
-                nextDate.textContent =
-                d.toLocaleDateString("ja-JP",options);
+                nextDate.textContent=
+                d.toLocaleDateString("ja-JP",option);
 
             }
 
             if(nextTitle){
 
-                nextTitle.textContent =
+                nextTitle.textContent=
                 nextEvent.title;
 
             }
 
             if(nextTime){
 
-                nextTime.textContent =
+                nextTime.textContent=
                 nextEvent.time;
 
             }
 
-            /* ==========================
-               あと何日
-            ========================== */
+            const diff=Math.ceil(
 
-            const diff =
-            Math.ceil(
-
-                (new Date(nextEvent.date)-today)
-
-                /(1000*60*60*24)
+                (d-today)/(1000*60*60*24)
 
             );
 
-            const countdown =
-            document.getElementById("countdown");
-
             if(countdown){
 
-                countdown.textContent =
-                `開催まで あと ${diff} 日`;
+                countdown.textContent=
+                "開催まで あと "+diff+"日";
 
             }
 
         }
 
+
         /* ==========================
-           全日程
+           SCHEDULE LIST
         ========================== */
 
-        const list =
+        const list=
         document.getElementById("schedule-list");
 
-        if(list){
+        if(!list) return;
 
-            list.innerHTML="";
+        list.innerHTML="";
 
-            events.forEach(event=>{
+        events.forEach(event=>{
 
-    const eventDate = new Date(event.date);
+            const eventDate=new Date(event.date);
+            eventDate.setHours(0,0,0,0);
 
-    const diff = Math.ceil(
+            const diff=Math.ceil(
 
-        (eventDate - today)
+                (eventDate-today)/(1000*60*60*24)
 
-        /(1000*60*60*24)
+            );
 
-    );
+            const week=[
+                "日",
+                "月",
+                "火",
+                "水",
+                "木",
+                "金",
+                "土"
+            ];
 
-    const week = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+            const weekDay=
+            week[eventDate.getDay()];
 
-    const weekDay = week[eventDate.getDay()];
+            let status="";
+            let badgeClass="";
+            let cardClass="";
 
-// 開催日
-const eventDate = new Date(event.date);
-eventDate.setHours(0, 0, 0, 0);
+            if(diff<0){
 
-// 今日
-const today = new Date();
-today.setHours(0, 0, 0, 0);
+                status="終了";
+                badgeClass="finished-badge";
+                cardClass="finished";
 
-// 開催までの日数
-const diff = Math.ceil(
-    (eventDate - today) / (1000 * 60 * 60 * 24)
-);
+            }
 
-let status = "";
-let badgeClass = "";
-let cardClass = "";
+            else if(diff===0){
 
-// 開催終了
-if (diff < 0) {
+                status="本日開催";
+                badgeClass="today-badge";
+                cardClass="today";
 
-    status = "終了";
-    badgeClass = "finished-badge";
-    cardClass = "finished";
+            }
 
-// 本日開催
-} else if (diff === 0) {
+            else if(diff<=30){
 
-    status = "本日開催";
-    badgeClass = "today-badge";
-    cardClass = "today";
+                status="受付中";
+                badgeClass="accept-badge";
+                cardClass="coming";
 
-// 開催30日前〜前日
-} else if (diff <= 30) {
+            }
 
-    status = "受付中";
-    badgeClass = "accept-badge";
-    cardClass = "coming";
+            else{
 
-// 開催31日前以上
-} else {
+                status="準備中";
+                badgeClass="prepare-badge";
+                cardClass="prepare";
 
-    status = "準備中";
-    badgeClass = "prepare-badge";
-    cardClass = "prepare";
+            }
 
-}
 
-    if(event.type === "ナイト"){
+            if(event.type==="ナイト"){
 
-        statusClass += " night";
+                cardClass+=" night";
 
-    }
+            }
 
-    list.innerHTML += `
 
-    <div class="campus-card ${statusClass}">
+            let countText="";
 
-        ${badge}
+            if(diff>0){
 
-        <span class="campus-date">
+                countText=
+                "開催まで あと "+diff+"日";
 
-            ${eventDate.getMonth()+1}/${eventDate.getDate()}
-            （${weekDay}）
+            }
 
-        </span>
+            else if(diff===0){
 
-        <div>
+                countText=
+                "本日開催";
 
-            <strong>
+            }
 
-                ${event.title}
+            else{
 
-            </strong>
+                countText=
+                "開催終了";
 
-            <br>
+            }
 
-            ${event.time}
 
-        </div>
+            list.innerHTML+=`
 
-    </div>
+            <div class="campus-card ${cardClass}">
 
-    `;
+                <span class="status ${badgeClass}">
+                    ${status}
+                </span>
 
-});
+                <div class="campus-date">
+                    ${eventDate.getMonth()+1}/${eventDate.getDate()}（${weekDay}）
+                </div>
 
-        }
+                <strong>
+                    ${event.title}
+                </strong>
+
+                <div>
+                    ${event.time}
+                </div>
+
+                <div class="countdown">
+                    ${countText}
+                </div>
+
+            </div>
+
+            `;
+
+        });
 
     }
 
