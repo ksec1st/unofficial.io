@@ -2110,11 +2110,17 @@ overflow-x:hidden;
 
 /* 準備中 */
 
-.prepare{
+.prepare::before{
 
-    opacity:.9;
+    background:
 
-    border:1px solid rgba(255,255,255,.15);
+    linear-gradient(
+
+    #facc15,
+
+    #f59e0b
+
+    );
 
 }
 
