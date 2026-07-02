@@ -140,50 +140,46 @@ async function loadSchedule() {
 
     const weekDay = week[eventDate.getDay()];
 
-    let statusClass = "";
-    let badge = "";
+    // 今日の日付
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
-    if(diff < 0){
+// 開催日
+const eventDate = new Date(event.date);
 
-        statusClass = "finished";
+// 開催日までの日数
+const diff = Math.ceil(
+    (eventDate - today) / (1000 * 60 * 60 * 24)
+);
 
-        badge = `
-        <span class="status finished-badge">
-            終了
-        </span>`;
+let status = "";
+let badgeClass = "";
 
-    }
+// 開催終了
+if (diff < 0) {
 
-    else if(diff === 0){
+    status = "終了";
+    badgeClass = "finished-badge";
 
-        statusClass = "today";
+// 本日
+} else if (diff === 0) {
 
-        badge = `
-        <span class="status today-badge">
-            本日開催
-        </span>`;
+    status = "本日開催";
+    badgeClass = "today-badge";
 
-    }
+// 1か月前（30日前）以内
+} else if (diff <= 30) {
 
-    else if(diff <= 7){
+    status = "受付中";
+    badgeClass = "accept-badge";
 
-        statusClass = "coming";
+// 1か月以上前
+} else {
 
-        badge = `
-        <span class="status accept-badge">
-            準備中
-        </span>`;
+    status = "準備中";
+    badgeClass = "prepare-badge";
 
-    }
-
-    else{
-
-        badge = `
-        <span class="status accept-badge">
-            受付中
-        </span>`;
-
-    }
+}
 
     if(event.type === "ナイト"){
 
